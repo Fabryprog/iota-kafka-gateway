@@ -84,7 +84,7 @@ public class IotaTransactionGateway {
                 }
 
                 String _tag = null;
-                if(transaction.getSignatureFragments().length() % 2 == 0) {
+                if(transaction.getTag().length() % 2 == 0) {
                     _tag = TrytesConverter.trytesToAscii(transaction.getTag());
                 } else {
                     _tag = TrytesConverter.trytesToAscii(transaction.getTag() + "9");
