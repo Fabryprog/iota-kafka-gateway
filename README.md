@@ -7,7 +7,7 @@ Note: Every transactions are converted into an AvroRecord with following schema
 ```json
 {
   "type": "record",
-  "namespace": "",
+  "namespace": "org.fabryprog.iota.kafka.pojo",
   "name": "Transaction",
   "version": "1",
   "fields": [
