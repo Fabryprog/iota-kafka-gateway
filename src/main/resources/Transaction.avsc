@@ -1,0 +1,14 @@
+{
+  "type": "record",
+  "namespace": "",
+  "name": "Transaction",
+  "version": "1",
+  "fields": [
+    { "name": "hash", "type": "string", "doc": "Transaction Hash" },
+    { "name": "address", "type": "string", "doc": "Address" },
+    { "name": "value", "type": "long", "doc": "Transaction value" },
+    { "name": "tag", "type": "string", "doc": "TAG" },
+    { "name": "timestamp", "type": "long", "doc": "Timestamp" },
+    { "name": "payload", "type": "string", "doc": "Payload" }
+  ]
+}
