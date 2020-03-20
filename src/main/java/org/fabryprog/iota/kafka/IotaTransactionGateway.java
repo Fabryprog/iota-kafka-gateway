@@ -27,21 +27,6 @@ public class IotaTransactionGateway {
     private String kafkaTopic = null;
     private boolean debug = false;
 
-    private final String TRANSACTION_AVRO_SCHEMA = "{ " +
-            "\"type\": \"record\", " +
-            "\"namespace\": \"\", " +
-            "\"name\": \"Transaction\", " +
-            "\"version\": \"1\", " +
-            "\"fields\": [ " +
-                "{ \"name\": \"hash\", \"type\": \"string\", \"doc\": \"Transaction Hash\" }, " +
-                "{ \"name\": \"address\", \"type\": \"string\", \"doc\": \"Address\" }, " +
-                "{ \"name\": \"value\", \"type\": \"long\", \"doc\": \"Transaction value\" }, " +
-                "{ \"name\": \"tag\", \"type\": \"string\", \"doc\": \"TAG\" }, " +
-                "{ \"name\": \"timestamp\", \"type\": \"long\", \"doc\": \"Timestamp\" }, " +
-                "{ \"name\": \"payload\", \"type\": \"string\", \"doc\": \"Payload\" } " +
-              "] " +
-            "}";
-
     public IotaTransactionGateway(final Properties properties, final String zmqUrl, final String IotaTXTopic, final boolean debug) {
         this.zmqUrl = zmqUrl;
         this.kafkaTopic = IotaTXTopic;
@@ -91,7 +76,7 @@ public class IotaTransactionGateway {
                 }
 
                 Schema.Parser parser = new Schema.Parser();
-                Schema schema = parser.parse(TRANSACTION_AVRO_SCHEMA);
+                Schema schema = parser.parse(org.fabryprog.iota.kafka.pojo.Transaction.AVRO_SCHEMA);
                 GenericRecord avroRecord = new GenericData.Record(schema);
                 avroRecord.put("hash", transaction.getHash());
                 avroRecord.put("address", transaction.getAddress());
