@@ -27,6 +27,7 @@ Note: Every transactions are converted into an AvroRecord with following schema
  - Kafka Properties
  - IOTA ZMQ node URL
  - Kafka Topic Name
+ - Kafka Key value
  - debug mode (default false)
  
 The method **run()** could be use to start transaction's listening 
@@ -45,7 +46,7 @@ public class MainClass {
         props.put("schema.registry.url", "http://kafka-registry:8081");
         
         // N.B. IOTA ZMQ Public node: https://iota-nodes.net/
-        new IotaTransactionGateway(props, "tcp://ultranode.iotatoken.nl:5556", "iota-gateway", true).run();
+        new IotaTransactionGateway(props, "tcp://ultranode.iotatoken.nl:5556", "iota-gateway", KeyEnum.HASH, true).run();
     }
 }
 ```

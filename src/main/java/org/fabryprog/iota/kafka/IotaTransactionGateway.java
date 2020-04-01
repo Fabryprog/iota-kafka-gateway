@@ -26,11 +26,17 @@ public class IotaTransactionGateway {
     private String zmqUrl = null;
     private String kafkaTopic = null;
     private boolean debug = false;
+    private KeyEnum key = null;
 
-    public IotaTransactionGateway(final Properties properties, final String zmqUrl, final String IotaTXTopic, final boolean debug) {
+    public enum KeyEnum {
+        HASH, TAG, ADDRESS
+    }
+
+    public IotaTransactionGateway(final Properties properties, final String zmqUrl, final String IotaTXTopic, final KeyEnum key, final boolean debug) {
         this.zmqUrl = zmqUrl;
         this.kafkaTopic = IotaTXTopic;
         this.debug = debug;
+        this.key = key;
 
         LogContext logContext = new LogContext(String.format("[Iota Kafka Gateway %s] ", this.kafkaTopic));
 
@@ -85,11 +91,24 @@ public class IotaTransactionGateway {
                 avroRecord.put("timestamp", transaction.getTimestamp());
                 avroRecord.put("payload", _msg);
 
-                ProducerRecord<String, Object> record = new ProducerRecord<>(kafkaTopic, transaction.getHash(), avroRecord);
+                String keyValue = null;
+                switch (key) {
+                    case TAG:
+                        keyValue = _tag;
+                        break;
+                    case ADDRESS:
+                        keyValue = transaction.getAddress();
+                        break;
+                    case HASH:
+                        keyValue = transaction.getHash();
+                        break;
+                }
+
+                ProducerRecord<String, Object> record = new ProducerRecord<>(kafkaTopic, keyValue, avroRecord);
 
                 kafkaProducer.send(record);
                 if(debug) {
-                    log.info(MessageFormat.format("Message sended to producer! [Topic {0}] - [Key {1}]", kafkaTopic, transaction.getHash()));
+                    log.info(MessageFormat.format("Message sended to producer! [Topic {0}] - [Key {1}]", kafkaTopic, keyValue));
                 }
             }
         } finally {
