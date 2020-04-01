@@ -44,6 +44,11 @@
             <version>1.9.2</version>
         </dependency>
         <dependency>
+            <groupId>com.typesafe</groupId>
+            <artifactId>config</artifactId>
+            <version>1.4.0</version>
+        </dependency>
+        <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>1.7.21</version> <!-- or use LATEST -->
@@ -69,7 +74,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>org.fabryprog.iota.kafka.MainClass</mainClass>
+                            <mainClass>org.fabryprog.iota.kafka.IotaTransactionGatewayMain</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

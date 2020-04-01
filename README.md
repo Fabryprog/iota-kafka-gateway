@@ -23,6 +23,30 @@ Note: Every transactions are converted into an AvroRecord with following schema
 
 ## USAGE
 
+## Usage nested MainClass
+
+The jar file (create with maven package lifecycle phase) uses a config file called **application.conf**. The config file must be equals below:
+
+
+```hocon
+# KAFKA
+kafka {
+  bootstrapServers = "kafka-broker-one:9092,kafka-broker-two:9092,kafka-broker-three:9092"
+  schemaRegistry = "http://kafka-registry:8081"
+  topic = "iota-gateway"
+  topicKey = "TAG"
+}
+
+# IOTA
+# visit https://iota-nodes.net/
+zmq="tcp://ultranode.iotatoken.nl:5556"
+
+# MISC
+debug=false
+```
+
+## Usage the Java API
+
 **IotaTransactionGateway** class parameters are:
  - Kafka Properties
  - IOTA ZMQ node URL
@@ -31,8 +55,6 @@ Note: Every transactions are converted into an AvroRecord with following schema
  - debug mode (default false)
  
 The method **run()** could be use to start transaction's listening 
-
-## Example Code
 
 ```java
 package org.fabryprog.iota.kafka;
