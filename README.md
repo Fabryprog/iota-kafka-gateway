@@ -25,8 +25,9 @@ Note: Every transactions are converted into an AvroRecord with following schema
 
 ## Usage nested MainClass
 
-The jar file (create with maven package lifecycle phase) uses a config file called **application.conf**. The config file must be equals below:
+The jar file (create with maven package lifecycle phase) uses a config file called **application.conf** (use -Dconfig.file=path/to/application.conf)
 
+The config file must be equals below:
 
 ```hocon
 # KAFKA
